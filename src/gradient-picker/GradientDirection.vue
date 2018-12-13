@@ -14,7 +14,7 @@
         </el-radio>
       </div>
     </fieldset>
-    <el-checkbox v-model="checked" class="my-el-checkbox" border @change="checkboxChange">对称</el-checkbox>
+    <el-checkbox v-model="checked" class="my-el-checkbox"  @change="checkboxChange">对称</el-checkbox>
   </div>
 </template>
 
@@ -30,20 +30,20 @@ export default {
           desc: '水平'
         },
         {
-          label: 'vertical',
-          desc: '垂直'
-        },
-        {
           label: 'upward',
           desc: '斜上'
         },
         {
-          label: 'downward',
-          desc: '斜下'
-        },
-        {
           label: 'radiate',
           desc: '放射'
+        },
+        {
+          label: 'vertical',
+          desc: '垂直'
+        },
+        {
+          label: 'downward',
+          desc: '斜下'
         }
       ]
     }
@@ -70,28 +70,33 @@ export default {
 
 <style>
 .gradient-direction {
-  width: 430px;
+  width: 280px;
 }
 .gradient-direction fieldset{
   display: inline-block;
   border: 1px solid #dcdfe6;
   border-radius: 3px;
-  width: 320px;
+  width: 175px;
 }
 .gradient-direction fieldset legend{
  padding: 0 10px;
 }
 .gradient-direction
 .gradient-direction-radios
-.my-el-radio:not(:first-child){
-  margin-left: 20px;
+.my-el-radio{
+  margin-left: 15px;
+}
+.gradient-direction
+.gradient-direction-radios
+.my-el-radio:nth-child(3n + 1){
+  margin-left: 0;
 }
 .gradient-direction .el-radio__label{
   padding-left: 0;
 }
 .gradient-direction .my-el-checkbox{
   float: right;
-  margin-top: 10px;
+  margin-top: 20px;
   padding:14px 10px 11px 10px;
   height: 48px;
 }

@@ -14,12 +14,20 @@
         @click.native="handleClick(index)">
       </gradient-controller-cursor>
     </div>
-    <div class="color-span" v-clickoutside='hide'>
-      <div class="color-display" :style="{'background-color': color.value}"></div>
-      <i class="el-icon-caret-bottom caret" @click="showColor"></i>
-      <color-container class="color-container" v-model="show" :color-value="color.value" @change="change" ref="color"></color-container>
+    <div class="color-span-container">
+      <span class="color-desc">颜色</span>
+      <div class="color-span" v-clickoutside='hide'>
+        <div class="color-display" :style="{'background-color': color.value}"></div>
+        <i class="el-icon-caret-bottom caret" @click="showColor"></i>
+        <color-container class="color-container" v-model="show" :color-value="color.value" @change="change" ref="color"></color-container>
+      </div>
+      <div class="num-container">
+        <span class="num-desc">位置</span>
+        <div class="num">
+          <el-input-number class="my-el-input-number" v-model="num" controls-position="right" :disabled="disabled" :precision="2" :step="0.01" @change="changPos"  :min="0" :max="100" size="mini"></el-input-number>%
+        </div>
+      </div>
     </div>
-    <el-input-number v-model="num" controls-position="right" :disabled="disabled" :precision="2" :step="0.01" @change="changPos"  :min="0" :max="100"></el-input-number>
   </div>
 </template>
 
@@ -55,7 +63,7 @@ export default {
       return gradientStr
     },
     colorArray () {
-      return this.colors.map(_ => { return {value: _.value, percent: this.toPercent(_.pos), pos: 300 * _.pos - 2.5 + 'px'} })
+      return this.colors.map(_ => { return {value: _.value, percent: this.toPercent(_.pos), pos: 280 * _.pos - 2.5 + 'px'} })
     },
     disabled () {
       return this.index === 0 || this.index === this.colors.length - 1
@@ -136,35 +144,54 @@ export default {
 .gradient-controller .gradient-controller-display{
   height: 40px;
   border: 1px solid #dcdfe6;
-  width: 300px;
+  width: 280px;
 }
 .gradient-controller .gradient-controller-cursors{
-  width: 300px;
+  width: 280px;
   height: 14px;
   position: relative;
 }
 .gradient-controller .gradient-controller-cursors .cursor{
   position: absolute;
 }
+.my-el-input-number.el-input-number.is-controls-right .el-input__inner{
+  padding-left: 5px;
+  padding-right: 20px;
+}
+.my-el-input-number.el-input-number--mini .el-input-number__decrease, .my-el-input-number.el-input-number--mini .el-input-number__increase{
+  width: 18px;
+  left: 40px;
+}
 </style>
 <style scoped>
+.color-span-container {
+  margin-top:10px;
+}
+.color-desc{
+  display: inline-block;
+  height: 26px;
+  line-height:26px;
+  vertical-align:top;
+  text-align:right;
+}
 .gradient-controller .color-span{
+  display: inline-block;
   position: relative;
-  width: 266px;
-  height: 33px;
+  width: 140px;
+  height: 26px;
   border: 1px solid #ccc;
 }
 .gradient-controller .color-span .color-display {
   display: inline-block;
-  width: 220px;
-  margin: 4px 0 4px 4px;
-  height: 25px;
+  width: 108px;
+  margin: 3px 0 3px 3px;
+  height: 20px;
 }
 .caret{
   float: right;
-  width: 33px;
-  line-height: 33px;
-  height: 33px;
+  width: 26px;
+  line-height: 26px;
+  height: 26px;
   text-align:center;
   cursor: pointer;
   font-size:20px;
@@ -181,5 +208,17 @@ export default {
   z-index: 2;
   top: 35px;
   left: -1px;
+}
+.num-container{
+  display: inline-block;
+  vertical-align:top;
+}
+.num-container .num-desc,.num-container .num{
+  display: inline-block;
+}
+.my-el-input-number{
+  width: 60px;
+}
+.num-container .num{
 }
 </style>

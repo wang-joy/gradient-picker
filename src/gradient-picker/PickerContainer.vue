@@ -1,20 +1,26 @@
 <template>
   <div class="gradient-picker-container">
-    <gradient-direction
-      v-model="direction"
-      @symmetryChange="handleSymmetryChange">
-    </gradient-direction>
-    <gradient-controller
-      :colors="colors"
-      @cursor-drag="handleDrag"
-      @cursor-drag-end="handleDragEnd"
-      @add-cursor="handleAddCursor"
-      @change="change"
-      @change-pos="changePos"
-      ref="controller">
-    </gradient-controller>
-    <div class="gradient-display" :style="{background: displayGradient}">
-
+    <div class="gradient-left">
+      <gradient-direction
+        v-model="direction"
+        @symmetryChange="handleSymmetryChange">
+      </gradient-direction>
+      <gradient-controller
+        :colors="colors"
+        @cursor-drag="handleDrag"
+        @cursor-drag-end="handleDragEnd"
+        @add-cursor="handleAddCursor"
+        @change="change"
+        @change-pos="changePos"
+        ref="controller">
+      </gradient-controller>
+    </div>
+    <div class="gradient-right">
+      <div class="btns">
+        <el-button size="mini" class="btn">确定</el-button>
+        <el-button size="mini" class="btn">取消</el-button>
+      </div>
+      <div class="gradient-display" :style="{background: displayGradient}"></div>
     </div>
   </div>
 </template>
@@ -151,16 +157,31 @@ export default {
       }
       return gradient
     }
-  },
-  watch: {
   }
 }
 </script>
 
 <style>
 .gradient-display {
-  width: 200px;
-  height: 200px;
+  clear: both;
+  width: 75px;
+  height: 75px;
   border: 1px solid #000;
+  margin-top:35px;
+}
+.gradient-left, .gradient-right{
+  display: inline-block;
+  vertical-align: top;
+}
+.gradient-right{
+  margin-left: 10px;
+  text-align: right;
+}
+.gradient-right .btns{
+  width: 75px;
+}
+.gradient-right .btns .btn{
+  margin-left: 0;
+  margin-top:10px;
 }
 </style>
